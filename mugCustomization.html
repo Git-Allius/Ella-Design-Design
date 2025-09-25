@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ella Design | Customizing Mug</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <!------ nav bar ------>
+
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" width="100px">
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            <img src="images/cart.png" width="30px" height="30px" onclick="goToCart()">
+            <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+
+    <div id="below-menu">
+        <!------ Customization Form ------>
+
+        <div class="customization-page">
+            <div class="container">
+                <div class="row">
+                    <div id="shirt-container" class="shirt-container" style="background-color: white; box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);" height="512px">
+                        <img src="images/whitemug.png" width="512px" height="512px" class="mugimage">
+                        <br>
+                    </div>
+                    <div class="col-2">
+                        <div class="customizationapplication" style="height: 700px">
+                            
+                                <div class="form-title">
+                                    <h4 id="customize">Customize</h4>
+                                    <hr id="Customize-Indicator">
+                                </div>
+
+                                <form id="CustomizeForm">
+                                    <p style="font-weight: bold; color: #555; text-align: center;">Enter Logo/Image:</p>
+                                    <input style="padding-top: 3px; text-align: right; width: 77%; border-color: rgb(221, 110, 147)" type="file" id="fileInput" accept="image/*">
+                                    <p style="font-weight: bold; color: #555; text-align: center; padding-bottom: 10px">Logo/Image Position:</p>
+                                    <select id="imagePosition" style="text-align: left; width: 77%; border-color: rgb(221, 110, 147)">
+                                        <option>Select Position</option>
+                                        <option>Handle Left</option>
+                                        <option>Handle Right</option>
+                                    </select>
+                                    <p style="font-weight: bold; color: #555; text-align: center;padding-top: 10px">Enter Your Text:</p>
+                                    <input id="customText" style="text-align: center; width: 77%; border-color: rgb(221, 110, 147)" type="text">
+                                    <p style="font-weight: bold; color: #555; text-align: center;padding-bottom: 10px">Text Position:</p>
+                                    <select id="textPosition" style="text-align: left; width: 77%; border-color: rgb(221, 110, 147)">
+                                        <option>Select Position</option>
+                                        <option>Handle Left</option>
+                                        <option>Handle Right</option>
+                                    </select>
+                                    <p style="font-weight: bold; color: #555; text-align: center; padding: 10px">Text Font:</p>
+                                    <select id="fontSelect" style="text-align: left; width: 77%; border-color: rgb(221, 110, 147)">
+                                        <option>Select Font</option>
+                                        <option style="font-family: Arial, Helvetica, sans-serif">Arial</option>
+                                        <option style="font-family:'Courier New', Courier, monospace">Courier</option>
+                                        <option style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Gill Sans</option>
+                                        <option style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Segoe UI</option>
+                                        <option style="font-family:'Times New Roman', Times, serif">Times New Roman</option>
+                                        <option style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Lucida Sans</option>
+                                        <option style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Trebuchet MS</option>
+                                        <option style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">Impact</option>
+                                        <option style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">Cambria</option>
+                                        <option style="font-family:Verdana, Geneva, Tahoma, sans-serif">Verdana</option>
+                                    </select> 
+                                    <p style="font-weight: bold; color: #555; text-align: center; padding: 10px">Extra Requests:</p>
+                                    <textarea id="comments" style="text-align: left; width: 77%; height: 100px; border-color: rgb(221, 110, 147); font-family: arial, helvetica, sans-serif"></textarea>
+                                    <button type="submit" class="btn" style="margin-top: 20px">Add to Cart</button>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!------ footer ------>
+
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col-1">
+                        <h3>Looking for more products?</h3>
+                        <a href="https://etsy.com/shop/polymerdesignbyella">Visit in Etsy as well!</a>
+                    </div>
+                    <div class="footer-col-2">
+                        <img src="images/logo.png">
+                        <p>The joy of picking the gift, the excitement of knowing that it will be delivered to a loved one's front door 
+                            as a surprise, and the pleasure of knowing they will have a huge smile when they open the box... all of it
+                            is why my shop exists!
+                        </p>
+                    </div>
+                    <div class="footer-col-3">
+                        <h3>Follow for more!</h3>
+                        <a href="https://www.instagram.com/designsbyellac/?igsh=OG8zaHpscm1zeHZy">Instagram</a>
+                    </div>
+                </div>
+
+                <hr>
+                <p class="copyright">Copyright 2025 - CUADROS</p>
+            </div>
+        </div>
+    </div>
+
+    <!------ menu/change page script ------>
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        var TShirt = document.getElementById("shirt");
+        var mug = document.getElementById("mug");
+        var tumbler = document.getElementById("tumbler");
+        var belowmenu = document.getElementById("below-menu");
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+                belowmenu.style.transitionDuration = "0.5s";
+                belowmenu.style.transform = "translateY(150px)";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+                belowmenu.style.transform = "translateY(0px)";
+            }
+        }
+
+        function changeTShirt() {
+            window.location.href = "shirt.html"
+        }
+
+        function changeMug() {
+            window.location.href = "mug.html"
+        }
+
+        function changeTumbler() {
+            window.location.href = "tumbler.html"
+        }
+
+        function goToCart() {
+            window.location.href = "cart.html"
+        }
+
+    </script>
+
+    <script>
+        document.getElementById("CustomizeForm").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+            event.preventDefault(); // Stop form submission
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById("CustomizeForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+        
+            // Collect data from form
+            const fileInput = document.getElementById("fileInput").value;
+            const imagePosition = document.getElementById("imagePosition").value;
+            const customText = document.getElementById("customText").value;
+            const textPosition = document.getElementById("textPosition").value;
+            const fontSelect = document.getElementById("fontSelect").value;
+            const comments = document.getElementById("comments").value;
+
+            const previewImage = "images/whitemug.png"
+        
+            // For now, use a fixed price. You can calculate this dynamically later
+            const price = 25.00;
+        
+            // Create a cart item object
+            const cartItem = {
+                previewImage: previewImage, // preview image
+                name: "Custom Mug",
+                price: price,
+                quantity: 1,
+                details: {
+                    size: null,
+                    color: null,
+                    image: fileInput,
+                    imagePosition: imagePosition,
+                    customText: customText,
+                    textPosition: textPosition,
+                    font: fontSelect,
+                    comments: comments
+                }
+            };
+        
+            // Get existing cart data or start fresh
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        
+            // Add new item
+            cart.push(cartItem);
+        
+            // Save back to localStorage
+            localStorage.setItem("cart", JSON.stringify(cart));
+        
+            // Redirect to cart page
+            window.location.href = "cart.html";
+        });
+    </script>
+</body>
+</html>

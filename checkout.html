@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ella Design | Checkout</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <!------ nav bar ------>
+
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" width="100px">
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            <img src="images/cart.png" width="30px" height="30px" onclick="goToCart()">
+            <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+
+    <div id="below-menu">
+      <!------ account page ------>
+
+      <div class="account-page">
+          <div class="small-container">
+              <div class="col-2" id="small-container">
+                  <div class="payment">
+                      <div class="form-title" width="450px">
+                          <h4 id="customize">Payment</h4>
+                          <hr id="Contact-Indicator">
+                      </div>
+                      
+                      <div>
+                          <form id="PaymentForm" style="max-width: 100%; margin-top: -50px;">
+                              <input type="text" placeholder="First Name" required>
+                              <input type="text" placeholder="Last Name" required>
+                              <input type="text" placeholder="Street Address" required>
+                              <input type="text" placeholder="ZIP/Postal Code (optional)">
+                              <input type="text" placeholder="City" required>
+                              <input type="text" placeholder="State" required>
+                              <input type="phone" placeholder="Phone Number">
+                              
+                              <div id="orderSummary" class="form-title" style="margin: 20px 0;">
+                                <hr id="Contact-Indicator">
+                                <h4 id="customize" style="padding-top: 10px;">Your Order</h4>
+                                <div id="orderItems"></div>
+                                <hr id="Contact-Indicator">
+
+                                <div class="subtaxtotal">
+                                  <table>
+                                    <tr>
+                                        <td>Subtotal</td>
+                                        <td><span style="font-weight: normal;" id="ck-subtotal">$0.00</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tax</td>
+                                        <td><span style="font-weight: normal;" id="ck-tax">$0.00</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td><span style="font-weight: normal;" id="ck-total">$0.00</span></td>
+                                    </tr>
+                                  </table>
+                                </div>
+                                
+                              </div>
+
+                              <button class="btn" onclick="goToVenmo(); return false;" type="button">Pay with Venmo</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!------ footer ------>
+
+      <div class="footer">
+          <div class="container">
+              <div class="row">
+                  <div class="footer-col-1">
+                      <h3>Looking for more products?</h3>
+                      <a href="https://etsy.com/shop/polymerdesignbyella">Visit in Etsy as well!</a>
+                  </div>
+                  <div class="footer-col-2">
+                      <img src="images/logo.png">
+                      <p>The joy of picking the gift, the excitement of knowing that it will be delivered to a loved one's front door 
+                          as a surprise, and the pleasure of knowing they will have a huge smile when they open the box... all of it
+                          is why my shop exists!
+                      </p>
+                  </div>
+                  <div class="footer-col-3">
+                      <h3>Follow for more!</h3>
+                      <a href="https://www.instagram.com/designsbyellac/?igsh=OG8zaHpscm1zeHZy">Instagram</a>
+                  </div>
+              </div>
+
+              <hr>
+              <p class="copyright">Copyright 2025 - CUADROS</p>
+          </div>
+      </div>
+    </div>
+
+    <!------ script ------>
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        var belowmenu = document.getElementById("below-menu");
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+                belowmenu.style.transitionDuration = "0.5s";
+                belowmenu.style.transform = "translateY(150px)";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+                belowmenu.style.transform = "translateY(0px)";
+            }
+        }
+
+        function goToCart() {
+            window.location.href = "cart.html"
+        }
+    </script>
+
+    <script>
+        document.getElementById("PaymentForm").addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+            event.preventDefault(); // Stop form submission
+            }
+        });
+    </script>
+
+<script>
+    // Render order summary on checkout
+    function renderCheckoutSummary() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const itemsDiv = document.getElementById("orderItems");
+  
+      if (!itemsDiv) return;
+  
+      // Show empty state
+      if (cart.length === 0) {
+        itemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+        document.getElementById("ck-subtotal").textContent = "$0.00";
+        document.getElementById("ck-tax").textContent = "$0.00";
+        document.getElementById("ck-total").textContent = "$0.00";
+        return;
+      }
+  
+      // Build list of items
+      let html = '<ul style="list-style: none; padding-left: 0;">';
+      let subtotal = 0;
+  
+      cart.forEach((item) => {
+        const lineTotal = item.price * item.quantity;
+        subtotal += lineTotal;
+  
+        // Compact line label for Venmo note + on-page display
+        const labelParts = [
+          item.name,
+          item.details?.shirtColor,
+          item.details?.shirtSize,
+          item.details?.customText ? `Text:"${item.details.customText}"` : null,
+          item.details?.image ? `Img:${item.details.image}` : null
+        ].filter(Boolean);
+  
+        html += `
+          <li style="margin: 6px 0;">
+            ${item.quantity} × ${labelParts.join(" ")} — $${lineTotal.toFixed(2)}
+          </li>`;
+      });
+  
+      html += "</ul>";
+  
+      const tax = subtotal * 0.07; // same 7% as cart.html
+      const total = subtotal + tax;
+  
+      itemsDiv.innerHTML = html;
+      document.getElementById("ck-subtotal").textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById("ck-tax").textContent = `$${tax.toFixed(2)}`;
+      document.getElementById("ck-total").textContent = `$${total.toFixed(2)}`;
+    }
+  
+    // Build a concise Venmo note from the cart
+    function buildVenmoNoteFromCart(cart) {
+      if (!cart || cart.length === 0) return "Order from Ella Design";
+  
+      // Keep the note compact: "2x Tee Blue M; 1x Mug; ..."
+      const parts = cart.map(item => {
+        const bits = [
+          `${item.quantity}x`,
+          item.name,
+          item.details?.shirtColor,
+          item.details?.shirtSize
+        ].filter(Boolean);
+        return bits.join(" ");
+      });
+  
+      // Venmo note length is limited; keep it short
+      let note = parts.join("; ");
+  
+      // Optional: include brief customizations if short enough
+      const extras = cart
+        .map(i => {
+          const e = [];
+          if (i.details?.customText) e.push(`Text:"${i.details.customText}"`);
+          if (i.details?.image) e.push(`Img:${i.details.image}`);
+          return e.join(" ");
+        })
+        .filter(Boolean)
+        .join("; ");
+  
+      if (extras && (note.length + extras.length) < 230) {
+        note += ` | ${extras}`;
+      }
+  
+      return note;
+    }
+  
+    function goToVenmo() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      // Calculate totals the same way as the display
+      let subtotal = 0;
+      cart.forEach(item => subtotal += item.price * item.quantity);
+      const tax = subtotal * 0.07;
+      const total = subtotal + tax;
+  
+      const recipient = "@Ella-cuadros"; // your Venmo username
+      const amount = total.toFixed(2);   // send total as amount
+      const note = buildVenmoNoteFromCart(cart);
+  
+      // Create Venmo payment link
+      const venmoUrl = `https://venmo.com/?txn=pay&recipients=${encodeURIComponent(recipient)}&amount=${encodeURIComponent(amount)}&note=${encodeURIComponent(note)}`;
+  
+      // Redirect to Venmo
+      window.location.href = venmoUrl;
+    }
+  
+    // Prevent Enter key from submitting the form (keeps your original UX)
+    document.getElementById("PaymentForm").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") event.preventDefault();
+    });
+  
+    // Render summary on load
+    window.addEventListener("load", renderCheckoutSummary);
+  </script>
+</body>
+</html>

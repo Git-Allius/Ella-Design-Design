@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ella Design | Shopping Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <!------ nav bar ------>
+
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" width="100px">
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            <img src="images/cart.png" width="30px" height="30px" onclick="goToCart()">
+            <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+
+    <div id="below-menu">
+        <!------ cart item details ------>
+
+        <div class="small-container">
+            <div class="cart-page">
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    
+                    <tbody id="cartBody">
+
+                    </tbody>
+        
+                    
+                </table>
+
+                <div class="total-price">
+
+                    <table>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td><span id="subtotal">$0.00</span></td>
+                        </tr>
+                        <tr>
+                            <td>Tax</td>
+                            <td><span id="tax">$0.00</span></td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td><span id="total">$0.00</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <a href="checkout.html" class="btn" style="max-width: 1080px; width: 100%; text-align: center;">Proceed to Checkout &#8594;</a>
+            </div>
+        </div>
+
+        <!------ footer ------>
+
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col-1">
+                        <h3>Looking for more products?</h3>
+                        <a href="https://etsy.com/shop/polymerdesignbyella">Visit in Etsy as well!</a>
+                    </div>
+                    <div class="footer-col-2">
+                        <img src="images/logo.png">
+                        <p>The joy of picking the gift, the excitement of knowing that it will be delivered to a loved one's front door 
+                            as a surprise, and the pleasure of knowing they will have a huge smile when they open the box... all of it
+                            is why my shop exists!
+                        </p>
+                    </div>
+                    <div class="footer-col-3">
+                        <h3>Follow for more!</h3>
+                        <a href="https://www.instagram.com/designsbyellac/?igsh=OG8zaHpscm1zeHZy">Instagram</a>
+                    </div>
+                </div>
+
+                <hr>
+                <p class="copyright">Copyright 2025 - CUADROS</p>
+            </div>
+        </div>
+    </div>
+
+    <!------ script ------>
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        var belowmenu = document.getElementById("below-menu");
+
+        MenuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+                belowmenu.style.transitionDuration = "0.5s";
+                belowmenu.style.transform = "translateY(150px)";
+            } else {
+                MenuItems.style.maxHeight = "0px";
+                belowmenu.style.transform = "translateY(0px)";
+            }
+        }
+
+        function goToCart() {
+            window.location.href = "cart.html"
+        }
+    </script>
+
+    <script>
+        function renderCart() {
+            const cartBody = document.getElementById("cartBody");
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        
+            cartBody.innerHTML = ""; // clear old rows
+            let subtotal = 0;
+        
+            cart.forEach((item, index) => {
+                const tr = document.createElement("tr");
+        
+                const itemSubtotal = item.price * item.quantity;
+                subtotal += itemSubtotal;
+        
+                tr.innerHTML = `
+                    <td>
+                        <div class="cart-info">
+                            <img src="${item.previewImage}">
+                            <div style="max-width: 150px;">
+                                <p style=>${item.name} ${item.details.shirtColor || ''} ${item.details.shirtSize || ''}</p>
+                                <small>Price: $${item.price.toFixed(2)}</small>
+                                <br>
+                                <small style="color: lightgrey;">Logo/Image: ${item.details.image || 'None'} ImagePosition: ${item.details.imagePosition || 'None'} Text: ${item.details.customText || 'None'} TextPosition: ${item.details.textPosition || 'None'} TextFont: ${item.details.font || 'None'} </small>
+                                <br>
+                                <small style="color: lightgrey;">Comments: ${item.details.comments || 'None'}</small><br>
+                                <a href="#" onclick="removeItem(${index});return false;">Remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="padding-left: 5px;"><input type="number" min="1" value="${item.quantity}" onchange="updateQuantity(${index}, this.value)"></td>
+                    <td>$${itemSubtotal.toFixed(2)}</td>
+                `;
+        
+                cartBody.appendChild(tr);
+            });
+        
+            const tax = subtotal * 0.07; // 7% example tax
+            const total = subtotal + tax;
+        
+            document.getElementById("subtotal").innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById("tax").innerText = `$${tax.toFixed(2)}`;
+            document.getElementById("total").innerText = `$${total.toFixed(2)}`;
+        }
+        
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+        }
+        
+        function updateQuantity(index, value) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart[index].quantity = parseInt(value);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+        }
+        
+        // Run when page loads
+        window.onload = renderCart;
+    </script>
+
+</body>
+</html>
